@@ -4,45 +4,19 @@
 // 각각의 시험장에 총감독관은 오직 1명만 있어야 하고, 부감독관은 여러 명 있어도 된다.
 // 각 시험장마다 응시생들을 모두 감시해야 한다. 이때, 필요한 감독관 수의 최솟값을 구하는 프로그램을 작성하시오.
 
-function essentialAdminNum(arr) {
-    let a = arr[0]; 	// 시험장 수
-    let b = arr[2][0];	// 총감독관 감시자 수
-    let c = arr[2][1];	// 부감독관 감시자 수
-    let res;
-    let remainder = 0;
-    let subAdmin = 0;
+function solution(arr) {
+    const [a, b, c] = [arr[0][0], arr[2][0], arr[2][1]];	// a: 시험장 수, b: 총감독관의 감시자 수, c: 부감독관의 감시자 수
+    let remainder, subAdmin = 0;
 
     for(let i = 0; i < a; i++) {
         remainder = Number(arr[1][i]-b);
         if(remainder >= c) {
-            let t = 0;
-            t += Number(Math.floor(remainder/c));
-            t += Number(remainder%c);
-            subAdmin += t;
+            let temp = 0;
+            temp += Number(Math.floor(remainder/c)) + Number(remainder%c);
+            subAdmin += temp;
         } else {
             subAdmin++;
         }
     }
-    res = Number(subAdmin) + Number(a);
-    return res;
+    return Number(subAdmin) + Number(a);
 }
-
-let arr1 = [
-    [3],
-    [3,4,5],
-    [2,2]
-];
-
-let arr2 = [
-    [5],
-    [10,9,10,9,10],
-    [7,20]
-];
-
-let arr3 = [
-    [5],
-    [10,9,10,9,10],
-    [7,2]
-];
-
-console.log(essentialAdminNum(arr3));
